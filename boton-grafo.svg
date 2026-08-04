@@ -18,7 +18,7 @@
       transition: all 0.3s ease;
     }
     
-    /* 🔥 EL TRUCO: Efecto Hover cuando el cursor pasa por encima */
+    /* 🔥 Efecto Hover cuando el cursor pasa por encima */
     svg:hover .btn-background {
       fill: #00ff66;       /* Se ilumina en verde neón estilo cyberpunk */
       stroke: #00ff66;
