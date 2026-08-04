@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grafo con D3.js</title>
+  <!-- Cargamos D3.js v7 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #0f172a; }
+    svg { width: 100vw; height: 100vh; }
+    .link { stroke: #64748b; stroke-opacity: 0.6; stroke-width: 2px; }
+    .node { stroke: #fff; stroke-width: 1.5px; cursor: pointer; }
+    text { fill: #f8fafc; font-size: 12px; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <svg id="grafo"></svg>
+
+  <script>
+    // 1. Datos del grafo (Nodos y Enlaces)
+    const data = {
+  nodes: [
+    // --- NIVEL 0: Raíz Global ---
+    { id: "Data", level: 0, group: 0 },
+
+    // --- NIVEL 1: Categorías Principales ---
+    { id: "Data Science", level: 1, group: 1 },
+    { id: "GIS",          level: 1, group: 2 },
+    { id: "Data Engineer", level: 1, group: 1 },
+
+    // --- NIVEL 2: Herramientas y Librerías (Nodos Hijos) ---
+    // Pertenecen al grupo de su categoría principal
+    { id: "Python", level: 2, group: 1 },
+    { id: "Pandas", level: 2, group: 1 },
+    { id: "NumPy",  level: 2, group: 1 },
+
+    { id: "QGIS",   level: 2, group: 2 },
+    { id: "ArcGIS", level: 2, group: 2 }
+  ],
+  links: [
+    // Conexiones Raíz -> Categorías
+    { source: "Data", target: "Data Science" },
+    { source: "Data", target: "GIS" },
+
+    // Conexiones Categorías -> Herramientas
+    { source: "Data Science", target: "Python" },
+    { source: "Data Science", target: "Pandas" },
+    { source: "Data Science", target: "NumPy" },
+
+    { source: "GIS", target: "QGIS" },
+    { source: "GIS", target: "ArcGIS" }
+  ]
+};
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const svg = d3.select("#grafo")
+      .attr("width", width)
+      .attr("height", height);
+
+    // Paleta de colores para los grupos
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    // 2. Configurar la simulación de fuerzas
+    const simulation = d3.forceSimulation(data.nodes)
+      .force("link", d3.forceLink(data.links).id(d => d.id).distance(100))
+      .force("charge", d3.forceManyBody().strength(-300)) // Repulsión entre nodos
+      .force("center", d3.forceCenter(width / 2, height / 2)); // Centrar en pantalla
+
+    // 3. Dibujar los enlaces (líneas)
+    const link = svg.append("g")
+      .selectAll("line")
+      .data(data.links)
+      .join("line")
+      .attr("class", "link");
+
+    // 4. Dibujar los nodos (círculos)
+    const node = svg.append("g")
+      .selectAll("circle")
+      .data(data.nodes)
+      .join("circle")
+      .attr("class", "node")
+      .attr("r", 15)
+      .attr("fill", d => color(d.group))
+      .call(drag(simulation)); // Habilitar arrastre
+
+    // 5. Agregar texto a los nodos
+    const labels = svg.append("g")
+      .selectAll("text")
+      .data(data.nodes)
+      .join("text")
+      .attr("dx", 18)
+      .attr("dy", 4)
+      .text(d => d.id);
+
+    // 6. Actualizar posiciones en cada "tick" de la simulación
+    simulation.on("tick", () => {
+      link
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+
+      node
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y);
+
+      labels
+        .attr("x", d => d.x)
+        .attr("y", d => d.y);
+    });
+
+    // Función para poder arrastrar los nodos con el ratón
+    function drag(simulation) {
+      function dragstarted(event) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+      }
+      
+      function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+      }
+      
+      function dragended(event) {
+        if (!event.active) simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+      }
+      
+      return d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+    }
+  </script>
+</body>
+</html>
