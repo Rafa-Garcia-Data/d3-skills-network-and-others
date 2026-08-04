@@ -1,0 +1,37 @@
+<svg xmlns="http://w3.org" viewBox="0 0 220 45" width="220" height="45">
+  <style>
+    /* Estilo base del botón en reposo */
+    .btn-background {
+      fill: #21262d;
+      stroke: #30363d;
+      stroke-width: 1.5;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      fill: #c9d1d9;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    /* 🔥 EL TRUCO: Efecto Hover cuando el cursor pasa por encima */
+    svg:hover .btn-background {
+      fill: #00ff66;       /* Se ilumina en verde neón estilo cyberpunk */
+      stroke: #00ff66;
+      filter: drop-shadow(0px 0px 5px rgba(0, 255, 102, 0.6));
+    }
+    svg:hover .btn-text {
+      fill: #0d1117;       /* El texto cambia a color oscuro para contrastar */
+    }
+  </style>
+
+  <!-- Dibujo físico del botón con esquinas redondeadas -->
+  <rect x="2" y="2" width="216" height="41" rx="6" class="btn-background" />
+  
+  <!-- Icono de joystick y texto del botón -->
+  <text x="50%" y="26" text-anchor="middle" class="btn-text">🕹️ VISITA DEL GRAFO</text>
+</svg>
