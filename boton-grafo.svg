@@ -1,4 +1,4 @@
-<svg xmlns="http://w3.org" viewBox="0 0 220 45" width="220" height="45">
+<svg xmlns="http://w3.org/2000/svg" viewBox="0 0 220 45" width="220" height="45">
   <style>
     /* Estilo base del botón en reposo */
     .btn-background {
@@ -31,6 +31,7 @@
 
   <!-- Dibujo físico del botón con esquinas redondeadas -->
   <rect x="2" y="2" width="216" height="41" rx="6" class="btn-background" />
+
   
   <!-- Icono de joystick y texto del botón -->
   <text x="50%" y="26" text-anchor="middle" class="btn-text">🕹️ VISITA DEL GRAFO</text>
