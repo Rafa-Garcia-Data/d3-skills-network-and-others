@@ -27,13 +27,15 @@
     // --- NIVEL 1: Categorías Principales ---
     { id: "Data Science", level: 1, group: 1 },
     { id: "GIS",          level: 1, group: 2 },
-    { id: "Data Engineer", level: 1, group: 1 },
+    { id: "Data Engineer", level: 1, group: 3 },
+    { id: "SQL",       level: 1, group: 4 },
+    { id: "Python Language",       level: 1, group: 5 },
 
     // --- NIVEL 2: Herramientas y Librerías (Nodos Hijos) ---
     // Pertenecen al grupo de su categoría principal
     { id: "Python", level: 2, group: 1 },
-    { id: "Pandas", level: 2, group: 1 },
-    { id: "NumPy",  level: 2, group: 1 },
+      { id: "Pandas", level: 3, group: 1 },
+      { id: "NumPy",  level: 3, group: 1 },
 
     { id: "QGIS",   level: 2, group: 2 },
     { id: "ArcGIS", level: 2, group: 2 }
@@ -42,11 +44,14 @@
     // Conexiones Raíz -> Categorías
     { source: "Data", target: "Data Science" },
     { source: "Data", target: "GIS" },
+    { source: "Data", target: "SQL" },
+    { source: "Data", target: "Data Engineer" },
+    { source: "Data", target: "Python Language" },
 
     // Conexiones Categorías -> Herramientas
     { source: "Data Science", target: "Python" },
-    { source: "Data Science", target: "Pandas" },
-    { source: "Data Science", target: "NumPy" },
+      { source: "Python", target: "Pandas" },
+      { source: "Python", target: "NumPy" },
 
     { source: "GIS", target: "QGIS" },
     { source: "GIS", target: "ArcGIS" }
