@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Grafo con D3.js</title>
+  <title>Knowledge Tree</title>
   <!-- Cargamos D3.js v7 -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
-    body { font-family: sans-serif; margin: 0; background: #0f172a; }
+    body { font-family: sans-serif; margin: 0; background: #0d6c6d; }
     svg { width: 100vw; height: 100vh; }
     .link { stroke: #64748b; stroke-opacity: 0.6; stroke-width: 2px; }
     .node { stroke: #fff; stroke-width: 1.5px; cursor: pointer; }
@@ -25,36 +25,54 @@
     { id: "Data", level: 0, group: 0 },
 
     // --- NIVEL 1: Categorías Principales ---
-    { id: "Data Science", level: 1, group: 1 },
-    { id: "GIS",          level: 1, group: 2 },
+    { id: "Data Science/Analyst", level: 1, group: 1 },
+   // { id: "GIS",          level: 1, group: 2 }, Grupo GIS comentado por no haberlo aprendido aún. 
     { id: "Data Engineer", level: 1, group: 3 },
     { id: "SQL",       level: 1, group: 4 },
     { id: "Python Language",       level: 1, group: 5 },
+    { id: "Power Bi",       level: 1, group: 6 },
+    { id: "Machine/Deep Learning",       level: 1, group: 7 },
 
     // --- NIVEL 2: Herramientas y Librerías (Nodos Hijos) ---
     // Pertenecen al grupo de su categoría principal
-    { id: "Python", level: 2, group: 1 },
-      { id: "Pandas", level: 3, group: 1 },
-      { id: "NumPy",  level: 3, group: 1 },
+    
+    { id: "Data Wrangler", level: 2, group: 1 },
+    { id: "Pandas", level: 2, group: 1 },
+    { id: "NumPy",  level: 2, group: 1 },
+    { id: "Matplotlib", level: 2, group: 1 },
+    { id: "Seaborn", level: 2, group: 1 },
 
-    { id: "QGIS",   level: 2, group: 2 },
-    { id: "ArcGIS", level: 2, group: 2 }
+    //{ id: "QGIS",   level: 2, group: 2 },
+    //{ id: "ArcGIS", level: 2, group: 2 },
+    //{ id: "Geopandas", level: 2, group: 2 },
+    //{ id: "Google Earth Engine", level: 2, group: 2 },
+
+    { id: "Docker", level: 2, group: 3 },
   ],
   links: [
     // Conexiones Raíz -> Categorías
-    { source: "Data", target: "Data Science" },
-    { source: "Data", target: "GIS" },
+    { source: "Data", target: "Data Science/Analyst" },
+    //{ source: "Data", target: "GIS" },
     { source: "Data", target: "SQL" },
+    { source: "Data", target: "Power Bi" },
     { source: "Data", target: "Data Engineer" },
     { source: "Data", target: "Python Language" },
-
+    { source: "Data", target: "Machine/Deep Learning" },
+  
     // Conexiones Categorías -> Herramientas
-    { source: "Data Science", target: "Python" },
-      { source: "Python", target: "Pandas" },
-      { source: "Python", target: "NumPy" },
+    
+    { source: "Data Science/Analyst", target: "Pandas" },
+    { source: "Data Science/Analyst", target: "Data Wrangler" },
+    { source: "Data Science/Analyst", target: "NumPy" },
+    { source: "Data Science/Analyst", target: "Matplotlib" },
+    { source: "Data Science/Analyst", target: "Seaborn" },
 
-    { source: "GIS", target: "QGIS" },
-    { source: "GIS", target: "ArcGIS" }
+    //{ source: "GIS", target: "QGIS" },
+    //{ source: "GIS", target: "ArcGIS" },
+    //{ source: "GIS", target: "Geopandas" },
+    //{ source: "GIS", target: "Google Earth Engine" },
+    
+    { source: "Data Engineer", target: "Docker" },
   ]
 };
 
