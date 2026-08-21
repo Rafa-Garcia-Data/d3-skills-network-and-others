@@ -26,7 +26,7 @@
 
     // --- NIVEL 1: Categorías Principales ---
     { id: "Data Science/Analyst", level: 1, group: 1 },
-   // { id: "GIS",          level: 1, group: 2 }, Grupo GIS comentado por no haberlo aprendido aún. 
+    { id: "GIS",          level: 1, group: 2 }, // Grupo GIS comentado por no haberlo aprendido aún. 
     { id: "Data Engineer", level: 1, group: 3 },
     { id: "SQL",       level: 1, group: 4 },
     { id: "Python Language",       level: 1, group: 5 },
@@ -42,9 +42,9 @@
     { id: "Matplotlib", level: 2, group: 1 },
     { id: "Seaborn", level: 2, group: 1 },
 
-    //{ id: "QGIS",   level: 2, group: 2 },
+    { id: "QGIS",   level: 2, group: 2 },
     //{ id: "ArcGIS", level: 2, group: 2 },
-    //{ id: "Geopandas", level: 2, group: 2 },
+    { id: "Geopandas", level: 2, group: 2 },
     //{ id: "Google Earth Engine", level: 2, group: 2 },
 
     { id: "Docker", level: 2, group: 3 },
@@ -52,7 +52,7 @@
   links: [
     // Conexiones Raíz -> Categorías
     { source: "Data", target: "Data Science/Analyst" },
-    //{ source: "Data", target: "GIS" },
+    { source: "Data", target: "GIS" },
     { source: "Data", target: "SQL" },
     { source: "Data", target: "Power Bi" },
     { source: "Data", target: "Data Engineer" },
@@ -67,9 +67,9 @@
     { source: "Data Science/Analyst", target: "Matplotlib" },
     { source: "Data Science/Analyst", target: "Seaborn" },
 
-    //{ source: "GIS", target: "QGIS" },
+    { source: "GIS", target: "QGIS" },
     //{ source: "GIS", target: "ArcGIS" },
-    //{ source: "GIS", target: "Geopandas" },
+    { source: "GIS", target: "Geopandas" },
     //{ source: "GIS", target: "Google Earth Engine" },
     
     { source: "Data Engineer", target: "Docker" },
